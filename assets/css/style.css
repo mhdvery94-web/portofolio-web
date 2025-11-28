@@ -144,7 +144,6 @@ h6 {
 /* -------------------------------------------------------------
    HEADER (BASE) – MOBILE OVERLAY
 -------------------------------------------------------------- */
-/* Default: dipakai untuk mobile (overlay glass ketika hamburger di-tap) */
 #header {
   position: fixed;
   inset: 0;
@@ -167,7 +166,6 @@ h6 {
     visibility 0.22s ease;
 }
 
-/* Saat mobile nav aktif – overlay muncul */
 .mobile-nav-active {
   overflow: hidden;
 }
@@ -203,7 +201,6 @@ h6 {
    DESKTOP NAVBAR – TOP BAR (≥ 992px)
 ========================================================= */
 @media (min-width: 992px) {
-  /* Header jadi top bar lembut */
   #header {
     top: 0;
     left: 0;
@@ -226,7 +223,6 @@ h6 {
     transform: none;
   }
 
-  /* main digeser ke bawah */
   #main {
     margin-left: 0;
     margin-top: 110px;
@@ -237,7 +233,6 @@ h6 {
     margin-top: 0;
   }
 
-  /* UL horizontal */
   .nav-menu > ul {
     display: flex;
     align-items: center;
@@ -376,7 +371,6 @@ h6 {
   color: #ffffff;
 }
 
-/* Sembunyikan hamburger di desktop */
 @media (min-width: 992px) {
   .mobile-nav-toggle {
     display: none;
@@ -396,7 +390,7 @@ h6 {
 
 @media (min-width: 992px) {
   #hero {
-    padding-top: 90px; /* supaya tidak ketabrak navbar */
+    padding-top: 90px;
   }
 }
 
@@ -417,7 +411,6 @@ h6 {
   z-index: 2;
 }
 
-/* Hero card (text) */
 .hero-card {
   background: #ffffff;
   border-radius: 24px;
@@ -502,7 +495,7 @@ h6 {
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  margin-bottom: 16px; /* jarak ke tombol */
+  margin-bottom: 16px;
 }
 
 #hero .custom-btn {
@@ -571,7 +564,6 @@ section {
   color: var(--text-main);
 }
 
-/* Jarak section di mobile sedikit lebih kecil lagi */
 @media (max-width: 768px) {
   section {
     padding: 40px 0;
@@ -762,54 +754,65 @@ section {
 }
 
 /* -------------------------------------------------------------
-   CERTIFICATES – GRID RAPIH & TIDAK BERTUMPUK
+   CERTIFICATES – FLEX GRID, HEIGHT SERAGAM
 -------------------------------------------------------------- */
-
-/* Container grid khusus certificates */
 #certificates .portfolio-container,
 #certificates .row.portfolio-container {
-  display: grid !important;
-  grid-template-columns: 1fr;      /* mobile: 1 kolom */
-  gap: 20px;                       /* jarak antar kartu */
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  height: auto !important;        /* override inline height dari Isotope */
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
-/* Pastikan item tidak absolute (biar nggak tumpuk) */
+/* Matikan posisi absolute + transform dari Isotope */
 #certificates .portfolio-item {
-  position: static !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
   width: 100%;
-  margin-bottom: 0;                /* sudah ada gap di grid */
+  max-width: 520px;
 }
 
-/* Kartu sertifikat: seragam & center */
+/* Tablet: 2 kolom */
+@media (min-width: 768px) {
+  #certificates .portfolio-item {
+    width: calc(50% - 10px);
+  }
+}
+
+/* Desktop: 3 kolom */
+@media (min-width: 1200px) {
+  #certificates .portfolio-item {
+    width: calc(33.333% - 14px);
+  }
+}
+
+/* Kartu sertifikat: aspect ratio sama, gambar cover */
 #certificates .portfolio-wrap {
-  max-width: 520px;
-  margin: 0 auto;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   border-radius: 20px;
   overflow: hidden;
+  display: block;
 }
 
 #certificates .portfolio-wrap img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Tablet: 2 kolom */
-@media (min-width: 768px) {
-  #certificates .portfolio-container,
-  #certificates .row.portfolio-container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Desktop lebar: 3 kolom */
-@media (min-width: 1200px) {
-  #certificates .portfolio-container,
-  #certificates .row.portfolio-container {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+/* Hilangkan overlay hover agar bersih kalau mau */
+#certificates .portfolio-info,
+#certificates .portfolio-links {
+  display: none;
 }
 
 /* -------------------------------------------------------------
@@ -1128,4 +1131,4 @@ section {
   to {
     transform: rotate(360deg) translate3d(0, 0, 0);
   }
-}
+     }
