@@ -167,8 +167,7 @@ h6 {
     visibility 0.22s ease;
 }
 
-/* Saat mobile nav aktif – overlay muncul, tapi tetap semi transparan,
-   konten di belakang masih sedikit kelihatan */
+/* Saat mobile nav aktif – overlay muncul */
 .mobile-nav-active {
   overflow: hidden;
 }
@@ -227,7 +226,7 @@ h6 {
     transform: none;
   }
 
-  /* main digeser ke bawah, bukan ke samping */
+  /* main digeser ke bawah */
   #main {
     margin-left: 0;
     margin-top: 110px;
@@ -503,11 +502,9 @@ h6 {
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  /* tambahkan ini: */
-  margin-bottom: 16px;
+  margin-bottom: 16px; /* jarak ke tombol */
 }
 
-/* Kalau mau tombol sedikit turun lagi, boleh tambahin ini: */
 #hero .custom-btn {
   margin-top: 4px;
 }
@@ -548,13 +545,13 @@ h6 {
    SECTION GENERAL
 -------------------------------------------------------------- */
 section {
-  padding: 48px 0; /* sebelumnya 60px 0 */
+  padding: 48px 0;
   overflow: hidden;
 }
 
 .section-title {
   text-align: center;
-  padding-bottom: 18px; /* sedikit lebih rapat */
+  padding-bottom: 18px;
 }
 
 .section-title h2 {
@@ -679,7 +676,7 @@ section {
 }
 
 /* -------------------------------------------------------------
-   PORTFOLIO / CERTIFICATES
+   PORTFOLIO (Projects umum)
 -------------------------------------------------------------- */
 .portfolio .portfolio-item {
   margin-bottom: 30px;
@@ -765,24 +762,31 @@ section {
 }
 
 /* -------------------------------------------------------------
-   CERTIFICATES – FIX LAYOUT SUPAYA TIDAK BERTUMPUK
+   CERTIFICATES – GRID RAPIH & TIDAK BERTUMPUK
 -------------------------------------------------------------- */
 
-/* Pakai grid khusus untuk section certificates */
-#certificates .portfolio-container {
-  display: grid;
-  grid-template-columns: 1fr;  /* default: 1 kolom di mobile */
-  gap: 20px;                   /* jarak antar kartu sertifikat */
+/* Container grid khusus certificates */
+#certificates .portfolio-container,
+#certificates .row.portfolio-container {
+  display: grid !important;
+  grid-template-columns: 1fr;      /* mobile: 1 kolom */
+  gap: 20px;                       /* jarak antar kartu */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
-/* Hilangkan margin-bawah tambahan dari portfolio-item,
-   karena kita sudah pakai gap di grid */
+/* Pastikan item tidak absolute (biar nggak tumpuk) */
 #certificates .portfolio-item {
-  margin-bottom: 0;
+  position: static !important;
+  width: 100%;
+  margin-bottom: 0;                /* sudah ada gap di grid */
 }
 
-/* Pastikan gambar sertifikat tidak aneh-aneh */
+/* Kartu sertifikat: seragam & center */
 #certificates .portfolio-wrap {
+  max-width: 520px;
+  margin: 0 auto;
+  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -794,14 +798,16 @@ section {
 
 /* Tablet: 2 kolom */
 @media (min-width: 768px) {
-  #certificates .portfolio-container {
+  #certificates .portfolio-container,
+  #certificates .row.portfolio-container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 /* Desktop lebar: 3 kolom */
 @media (min-width: 1200px) {
-  #certificates .portfolio-container {
+  #certificates .portfolio-container,
+  #certificates .row.portfolio-container {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
