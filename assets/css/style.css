@@ -765,6 +765,48 @@ section {
 }
 
 /* -------------------------------------------------------------
+   CERTIFICATES – FIX LAYOUT SUPAYA TIDAK BERTUMPUK
+-------------------------------------------------------------- */
+
+/* Pakai grid khusus untuk section certificates */
+#certificates .portfolio-container {
+  display: grid;
+  grid-template-columns: 1fr;  /* default: 1 kolom di mobile */
+  gap: 20px;                   /* jarak antar kartu sertifikat */
+}
+
+/* Hilangkan margin-bawah tambahan dari portfolio-item,
+   karena kita sudah pakai gap di grid */
+#certificates .portfolio-item {
+  margin-bottom: 0;
+}
+
+/* Pastikan gambar sertifikat tidak aneh-aneh */
+#certificates .portfolio-wrap {
+  overflow: hidden;
+}
+
+#certificates .portfolio-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Tablet: 2 kolom */
+@media (min-width: 768px) {
+  #certificates .portfolio-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop lebar: 3 kolom */
+@media (min-width: 1200px) {
+  #certificates .portfolio-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* -------------------------------------------------------------
    STACK CARDS (Skills & Projects)
 -------------------------------------------------------------- */
 .stack-card {
