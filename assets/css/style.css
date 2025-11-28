@@ -789,7 +789,7 @@ section {
 }
 
 /* -------------------------------------------------------------
-   CERTIFICATES – FLEX GRID, HEIGHT SERAGAM (TANPA MATIKAN LIGHTBOX)
+   CERTIFICATES – FLEX GRID, FULL IMAGE (NO CROP)
 -------------------------------------------------------------- */
 #certificates .portfolio-container,
 #certificates .row.portfolio-container {
@@ -802,7 +802,8 @@ section {
   margin-right: 0 !important;
 }
 
-/* Matikan posisi absolute + transform dari Isotope, tapi TIDAK menyentuh link */
+/* hilangkan posisi absolute/transform dari Isotope untuk item,
+   supaya grid rapi tapi link/lightbox tetap jalan */
 #certificates .portfolio-item {
   position: relative !important;
   top: auto !important;
@@ -828,26 +829,25 @@ section {
   }
 }
 
-/* Kartu sertifikat: aspect ratio sama, gambar cover */
+/* Kartu sertifikat: biarkan tinggi mengikuti gambar,
+   jadi tidak ada bagian yang kepotong */
 #certificates .portfolio-wrap {
   width: 100%;
-  aspect-ratio: 16 / 9;
   border-radius: 20px;
   overflow: hidden;
   display: block;
+  background: var(--bg-card);
 }
 
 #certificates .portfolio-wrap img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;      /* << ini yang bikin gambar kebuka full */
+  object-fit: contain;
 }
 
-/* Catatan:
-   TIDAK ada rule display:none untuk .portfolio-info / .portfolio-links
-   supaya tombol zoom (portfolio-lightbox) tetap muncul & berfungsi.
-*/
+/* overlay & tombol zoom tetap ada (tidak di-display:none)
+   jadi lightbox glightbox masih berfungsi */
 
 /* -------------------------------------------------------------
    STACK CARDS (Skills & Projects)
