@@ -178,6 +178,7 @@ h6 {
 
 /* -------------------------------------------------------------
    HEADER (BASE) – MOBILE OVERLAY
+   (Hanya aktif saat mobile-nav-active)
 -------------------------------------------------------------- */
 #header {
   position: fixed;
@@ -198,7 +199,8 @@ h6 {
   visibility: hidden;
   transform: translateY(-10px);
   transition: opacity 0.22s ease, transform 0.22s ease,
-    visibility 0.22s ease;
+    visibility 0.22s ease, background 0.2s ease, box-shadow 0.2s ease,
+    border-bottom-color 0.2s ease;
 }
 
 .mobile-nav-active {
@@ -234,6 +236,9 @@ h6 {
 
 /* =========================================================
    DESKTOP NAVBAR – TOP BAR (≥ 992px)
+   - Default: ikuti warna body (transparan)
+   - Hover: pakai background putih blur seperti sebelumnya
+   - Header dibuat lebih kecil
 ========================================================= */
 @media (min-width: 992px) {
   #header {
@@ -242,25 +247,33 @@ h6 {
     right: 0;
     bottom: auto;
     width: 100%;
-    height: 56px;
-    padding: 0 32px;
+    height: 48px;                 /* lebih kecil */
+    padding: 0 18px;              /* padding mengecil */
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    background: transparent;      /* ikut body / tidak menutup pattern */
+    backdrop-filter: none;
+    border-bottom: 0;
     border-right: none;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    box-shadow: none;
     overflow-y: visible;
     opacity: 1;
     visibility: visible;
     transform: none;
   }
 
+  /* Saat hover di area header: aktifkan background lama */
+  #header:hover {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+  }
+
   #main {
     margin-left: 0;
-    margin-top: 110px;
+    margin-top: 90px;   /* jarak konten dari atas (lebih kecil dari 110) */
   }
 
   .nav-menu {
@@ -421,11 +434,12 @@ h6 {
   position: relative;
   display: flex;
   align-items: center;
+  scroll-margin-top: 90px;  /* biar pas klik Home nggak kepotong */
 }
 
 @media (min-width: 992px) {
   #hero {
-    padding-top: 90px;
+    padding-top: 70px;  /* sedikit offset dari header kecil */
   }
 }
 
@@ -575,6 +589,7 @@ h6 {
 section {
   padding: 48px 0;
   overflow: hidden;
+  scroll-margin-top: 90px;  /* supaya judul section tidak ketutup header */
 }
 
 .section-title {
@@ -842,12 +857,9 @@ section {
 #certificates .portfolio-wrap img {
   display: block;
   width: 100%;
-  height: auto;      /* << ini yang bikin gambar kebuka full */
+  height: auto;
   object-fit: contain;
 }
-
-/* overlay & tombol zoom tetap ada (tidak di-display:none)
-   jadi lightbox glightbox masih berfungsi */
 
 /* -------------------------------------------------------------
    STACK CARDS (Skills & Projects)
@@ -1165,4 +1177,4 @@ section {
   to {
     transform: rotate(360deg) translate3d(0, 0, 0);
   }
-     }
+}
