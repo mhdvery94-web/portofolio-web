@@ -1,3 +1,5 @@
+
+
 /**
 * Template Name: MyResume (Customized by Fajri)
 * Base: BootstrapMade MyResume
@@ -178,7 +180,7 @@ h6 {
 
 /* -------------------------------------------------------------
    HEADER (BASE) – MOBILE OVERLAY
-   (aktif saat mobile-nav-active)
+   (Hanya aktif saat mobile-nav-active)
 -------------------------------------------------------------- */
 #header {
   position: fixed;
@@ -236,25 +238,25 @@ h6 {
 
 /* =========================================================
    DESKTOP NAVBAR – TOP BAR (≥ 992px)
-   - Header tidak fixed, jadi terpisah dari section
-   - Background ikut body, dan hanya putih blur ketika di-hover
+   - Default: ikuti warna body (transparan)
+   - Hover: pakai background putih blur seperti sebelumnya
+   - Header dibuat lebih kecil
 ========================================================= */
 @media (min-width: 992px) {
   #header {
-    position: static;          /* BUKAN fixed lagi */
-    top: auto;
-    left: auto;
-    right: auto;
+    top: 0;
+    left: 0;
+    right: 0;
     bottom: auto;
     width: 100%;
-    height: auto;
-    padding: 10px 24px;
+    height: 48px;                 /* lebih kecil */
+    padding: 0 18px;              /* padding mengecil */
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;   /* biar nyatu dengan pattern body */
+    background: transparent;      /* ikut body / tidak menutup pattern */
     backdrop-filter: none;
-    border-bottom: none;
+    border-bottom: 0;
     border-right: none;
     box-shadow: none;
     overflow-y: visible;
@@ -263,7 +265,7 @@ h6 {
     transform: none;
   }
 
-  /* efek saat mouse di area header */
+  /* Saat hover di area header: aktifkan background lama */
   #header:hover {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
@@ -271,10 +273,9 @@ h6 {
     box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
   }
 
-  /* main tidak perlu offset lagi karena header tidak nutup konten */
   #main {
     margin-left: 0;
-    margin-top: 0;
+    margin-top: 90px;   /* jarak konten dari atas (lebih kecil dari 110) */
   }
 
   .nav-menu {
@@ -435,11 +436,12 @@ h6 {
   position: relative;
   display: flex;
   align-items: center;
+  scroll-margin-top: 90px;  /* biar pas klik Home nggak kepotong */
 }
 
 @media (min-width: 992px) {
   #hero {
-    padding-top: 20px;  /* sedikit jarak dari navbar */
+    padding-top: 70px;  /* sedikit offset dari header kecil */
   }
 }
 
@@ -589,6 +591,7 @@ h6 {
 section {
   padding: 48px 0;
   overflow: hidden;
+  scroll-margin-top: 90px;  /* supaya judul section tidak ketutup header */
 }
 
 .section-title {
@@ -811,11 +814,13 @@ section {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  height: auto !important;
+  height: auto !important;        /* override inline height dari Isotope */
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
+/* hilangkan posisi absolute/transform dari Isotope untuk item,
+   supaya grid rapi tapi link/lightbox tetap jalan */
 #certificates .portfolio-item {
   position: relative !important;
   top: auto !important;
@@ -841,6 +846,8 @@ section {
   }
 }
 
+/* Kartu sertifikat: biarkan tinggi mengikuti gambar,
+   jadi tidak ada bagian yang kepotong */
 #certificates .portfolio-wrap {
   width: 100%;
   border-radius: 20px;
